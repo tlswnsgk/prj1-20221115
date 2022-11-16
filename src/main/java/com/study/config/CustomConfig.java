@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,8 +26,10 @@ public class CustomConfig {
 
 	@Value("${aws.accessKeyId}")
 	private String accessKeyId;
+	
 	@Value("${aws.secretAccessKey}")
 	private String secretAccessKey;
+	
 	
 	@Value("${aws.s3.file.url.prefix}")
 	private String imgUrl;
@@ -38,8 +39,9 @@ public class CustomConfig {
 	
 	@PostConstruct
 	public void init() {
-    	servletContext.setAttribute("imgUrl", imgUrl);
+		servletContext.setAttribute("imgUrl", imgUrl);
 	}
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		
@@ -49,10 +51,11 @@ public class CustomConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.formLogin().loginPage("/member/login");
+		http.csrf().disable();
 		
 		return http.build();
 	}
-	
+
 	@Bean
 	public S3Client s3Client() {
 		return S3Client.builder()
@@ -64,8 +67,16 @@ public class CustomConfig {
 	public AwsCredentialsProvider awsCredentialsProvider() {
 		return StaticCredentialsProvider.create(awsCredentials());
 	}
+	
 	@Bean
 	public AwsCredentials awsCredentials() {
 		return AwsBasicCredentials.create(accessKeyId, secretAccessKey);
 	}
 }
+
+
+
+
+
+
+

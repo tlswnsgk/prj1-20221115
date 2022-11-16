@@ -1,16 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<form method="post">
-	id <input type="text" name = "username"> <br>
+	id <input type="text" name="username"> <br>
 	pw <input type="text" name="password"> <br>
-	<input type="submit" value="로그인">
+	<%--
+	<sec:csrfInput/>
+	 --%>
+	<input type="submit" value="濡쒓렇�씤">
+	
 	</form>
 </body>
 </html>
