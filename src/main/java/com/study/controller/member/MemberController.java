@@ -23,6 +23,11 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	
+	@GetMapping("login")
+	public void login() {
+		
+	}
 
 	@GetMapping("existNickName/{nickName}")
 	@ResponseBody
