@@ -1,6 +1,7 @@
 package com.study.service.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -179,5 +180,24 @@ public class BoardSerivce {
 
 		s3Client.deleteObject(deleteObjectRequest);
 	}
+
+	public Map<String, Object> updateLike(String boardId, String username) {
+		// boardId와 username으로 좋아요 테이블 검색해서 있으면?
+		// 삭제
+		map.put("current","liked");
+		
+		// 없으면?
+		// insert
+		map.put("current","not liked");
+		
+		// 현재 몇 개인지
+		map.put("count",count);
+		
+		return map;
+	}
+	
+	
+	
+	
 
 }
