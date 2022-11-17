@@ -32,11 +32,16 @@ public interface BoardMapper {
 	int insertLike(String boardId, String memberId);
 
 	int countLikeByBoardId(String boardId);
-	
-	default BoardDto select (int id) {
-		return select(id,null);
+
+	default BoardDto select(int id) {
+		return select(id, null);
 	}
 
+	int deleteLikeByBoardId(int id);
+
+	int deleteLikeByMemberId(String id);
+
+	List<BoardDto> listByMemberId(String id);
 }
 
 

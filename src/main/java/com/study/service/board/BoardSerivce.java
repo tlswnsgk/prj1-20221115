@@ -170,6 +170,9 @@ public class BoardSerivce {
 		
 //		int a = 3 / 0; // runtime exception
 		
+		// 좋아요 지우기
+		boardMapper.deleteLikeByBoardId(id);
+		
 		// 게시물 지우기
 		return boardMapper.delete(id);
 	}
@@ -209,7 +212,7 @@ public class BoardSerivce {
 
 	public BoardDto get(int id) {
 		// TODO Auto-generated method stub
-		return get(id,null);
+		return get(id, null);
 	}
 	
 }
