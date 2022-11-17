@@ -38,7 +38,14 @@
 						
 					</h1>
 					<h1>
-						<span id="likeButton">
+						<span 
+							
+							<sec:authorize access="not isAuthenticated()">
+								style="pointer-events: none;"
+							</sec:authorize>
+						
+							id="likeButton"
+							>
 							
 							<c:if test="${board.liked }">
 								<i class="fa-solid fa-thumbs-up"></i>
