@@ -106,10 +106,18 @@ public class BoardController {
 	public void get(
 			// @RequestParam 생략 가능
 			@RequestParam(name = "id") int id,
-			Model model) {
+			Model model,
+			Authentication authentication 
+			) {
+		String username = null;
+		
+		if (authentication != null) {
+			username = authentication.getName();
+		}
+		
 		// req param
 		// business logic (게시물 db에서 가져오기)
-		BoardDto board = service.get(id);
+		BoardDto board = service.get(id, username);
 		// add attribute
 		model.addAttribute("board", board);
 		// forward
@@ -158,17 +166,26 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
 	@PutMapping("like")
 	@ResponseBody
 	@PreAuthorize("isAuthenticated()")
-	public Map<String,Object> like(@RequestBody Map<String,String> req, Authentication  authentication){
+	public Map<String, Object> like(@RequestBody Map<String, String> req,
+			Authentication authentication) {
 		
-		Map<String,Object> result = service.updateLike(req.get("boardId"),authentication.getName());
+		Map<String, Object> result = service.updateLike(req.get("boardId"), authentication.getName());
 		
 		return result;
 	}
 	
 }
+
+
+
+
+
+
+
 
 
 

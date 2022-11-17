@@ -43,7 +43,7 @@
 		boardId,
 		content,
 		writer,
-		(writer=#{username})editable,
+		(writer = #{username}) editable,
 		inserted
 	FROM
 		Reply
